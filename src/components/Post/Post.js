@@ -6,7 +6,8 @@ class Post extends Component{
     state = {
         posts: [
             {title: 'post 1', description: 'description 1'},
-            {title: 'post 2', description: 'description 3'}
+            {title: 'post 2', description: 'description 3'},
+            {title: 'post 3', description: 'description 3'}
         ],
         postTitle : 'Posts List',
         showPost : true
@@ -26,14 +27,28 @@ class Post extends Component{
 
     getPosts(){
         if(!this.state.showPost) return null;
+
+        // let posts = this.state.posts.map((post) => (
+        //     <SinglePost 
+        //                 title={post.title} 
+        //                 description={post.description}/>
+        // ));
+
+        let posts = [];
+
+        for (let post of this.state.posts) {
+            posts.push(
+                <SinglePost 
+                    key={post.title} 
+                    title={post.title} 
+                    description={post.description}/>
+            );
+        }
+
+        
         return (
             <div className='flex'>
-                    <SinglePost 
-                        title={this.state.posts[0].title} 
-                        description={this.state.posts[0].description}/>
-                    <SinglePost 
-                        title={this.state.posts[1].title} 
-                        description={this.state.posts[1].description}/>
+                    {posts}
             </div>
         );
     }

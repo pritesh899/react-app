@@ -8,13 +8,34 @@ class Post extends Component{
             {title: 'post 1', description: 'description 1'},
             {title: 'post 2', description: 'description 3'}
         ],
-        postTitle : 'Posts List'
+        postTitle : 'Posts List',
+        showPost : true
     };
 
     updateTitlehandler() {
         this.setState({
             postTitle: 'updated post title'
         });
+    }
+
+    togglePostHandler = () => {
+        this.setState({
+            showPost : !this.state.showPost
+        })
+    }
+
+    getPosts(){
+        if(!this.state.showPost) return null;
+        return (
+            <div className='flex'>
+                    <SinglePost 
+                        title={this.state.posts[0].title} 
+                        description={this.state.posts[0].description}/>
+                    <SinglePost 
+                        title={this.state.posts[1].title} 
+                        description={this.state.posts[1].description}/>
+            </div>
+        );
     }
 
     render(){
@@ -34,6 +55,8 @@ class Post extends Component{
             });
         }, 3000)
 
+      
+
         return (
             <div>
                 <hr />
@@ -49,7 +72,20 @@ class Post extends Component{
                     <SinglePost title={this.state.posts[0].title} description={this.state.posts[0].description}/>
                     <SinglePost title={this.state.posts[1].title} description={this.state.posts[1].description}/>
                 </div>
+
+                <hr />
+                <h2 className='text-2xl font-bold'>{this.state.postTitle}</h2>
+                <hr />
+                <div>
+                    <button onClick={this.togglePostHandler} className="px-5 py-5 bg-yellow-700 text-white">
+                        {this.state.showPost ? 'Hide posts' : 'Show posts'}
+                    </button>
+                </div>
+                <hr />
+                {this.getPosts()}
             </div>
+
+            
         )
     }
 }

@@ -11,6 +11,12 @@ class Post extends Component{
         postTitle : 'Posts List'
     };
 
+    updateTitlehandler() {
+        this.setState({
+            postTitle: 'updated post title'
+        });
+    }
+
     render(){
 
         setTimeout( () => {
@@ -32,6 +38,12 @@ class Post extends Component{
             <div>
                 <hr />
                 <h2 className='text-2xl font-bold'>{this.state.postTitle}</h2>
+                <hr />
+                <div>
+                    <button onClick={this.updateTitlehandler.bind(this)}>
+                        update
+                    </button>
+                </div>
                 <hr />
                 <div className='flex'>
                     <SinglePost title={this.state.posts[0].title} description={this.state.posts[0].description}/>
